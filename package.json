@@ -1,0 +1,16 @@
+{
+  "name": "currency-conversion",
+  "version": "1.0.0",
+  "description": "simple app for currency conversion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Michael George",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
