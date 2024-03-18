@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const {connectToDB} = require('../db');
 
 async function registerUser(req, res) {
-    console.log('req.body', req.body);
     try {
         const db = await connectToDB();
         const userData = req.body;
