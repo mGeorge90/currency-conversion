@@ -19,6 +19,8 @@ services:
       - "3000:3000"
     depends_on:
       - mongodb
+    volumes:
+      - .:/usr/src/app
 
 volumes:
   mongodb_data:

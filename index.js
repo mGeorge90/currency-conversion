@@ -3,6 +3,7 @@ const app = express();
 require('dotenv').config();
 const apiRoutes = require('./apiRoutes');
 
+app.use(express.json());
 app.use('/api', apiRoutes);
 
 app.listen(3000, () => {
