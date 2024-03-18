@@ -29,19 +29,14 @@ async function loginUser(req, res) {
     try {
         const db = await connectToDB();
         const { email, password } = req.body;
-        // Find the user in the database
         const user = await db.collection('users').findOne({ email });
-        console.log('user', user);
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-        // Check if the password is correct
         const passwordMatch = await bcrypt.compare(password, user.password);
-        console.log('passwordMatch', password, user.password, passwordMatch);
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-        // Generate JWT token
         const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET);
         res.json({ message: 'User authenticated successfully', data: { token } });
     } catch (error) {
@@ -50,7 +45,20 @@ async function loginUser(req, res) {
     }
 }
 
+async function getUserHistory(req, res) {
+    try {
+        const db = await connectToDB();
+        const userId = req.user.userId;
+        const userHistory = await db.collection('userHistory').find({ userId }).toArray();
+        res.json({ data: userHistory });
+    } catch (error) {
+        console.error('Error getting user history:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 module.exports = {
     registerUser,
     loginUser,
+    getUserHistory
 };

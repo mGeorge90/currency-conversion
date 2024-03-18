@@ -9,8 +9,9 @@ router.get('/__health', (req, res) => {
     res.send('I am healthy!');
 });
 
-router.post('/register', userController.registerUser);
-router.post('/login', userController.loginUser);
+router.post('/user/register', userController.registerUser);
+router.post('/user/login', userController.loginUser);
+router.get('/user/history', authMiddleware, userController.getUserHistory);
 
 router.get('/convert', authMiddleware, currencyController.convert);
 
