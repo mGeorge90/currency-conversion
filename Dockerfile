@@ -10,14 +10,18 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy .env.example into the container
-COPY .env.example .env
-
 # Copy the rest of the application code
 COPY . .
 
+# Copy .env.example into the container
+COPY .env.example .env
+
+
 # Expose port 3000
 EXPOSE 3000
+
+# Expose another port (e.g., 3001) for running tests
+EXPOSE 3001
 
 # Command to run the application
 CMD ["npm", "start"]

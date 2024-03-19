@@ -8,7 +8,9 @@ async function convert(req, res) {
         from = from.toUpperCase();
         to = to.toUpperCase();
         const response = await axios.get(`https://v6.exchangerate-api.com/v6/${exchangeRateAPIKey}/latest/${from}`);
+        console.log(response.data);
         const exchangeRate = response.data?.conversion_rates;
+        console.log('&&&&', exchangeRate, exchangeRate[to])
         const exchangeRateTarget = exchangeRate[to];
         if (!exchangeRateTarget) {
             return res.status(400).json({ error: 'Invalid currency' });
